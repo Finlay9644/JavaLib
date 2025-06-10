@@ -1,4 +1,6 @@
-package JLib.util;
+package f.util;
+
+import java.util.Arrays;
 
 public class StringBuilder implements CharSequence {
 
@@ -15,7 +17,7 @@ public class StringBuilder implements CharSequence {
     }
     public StringBuilder(CharSequence content) {
         index = content.length();
-        size = Integer.highestOneBit(index);
+        size = Integer.highestOneBit(index) << 1;
 
         value = new char[size];
         System.arraycopy(content.toString().toCharArray(), 0, value, 0, content.length());
@@ -53,5 +55,10 @@ public class StringBuilder implements CharSequence {
     @Override
     public CharSequence subSequence(int start, int end) {
         return new String(value).subSequence(start, end);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value, 0, index);
     }
 }
